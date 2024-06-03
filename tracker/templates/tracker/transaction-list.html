@@ -1,0 +1,53 @@
+{% extends "tracker/base.html" %}
+
+{% block titile %}Transaction List{% endblock titile %}
+
+{% block content %}
+    
+    {% if transactions %}
+
+        <div class="overflow-x-auto">
+            <table class="table">
+                <!-- head -->
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>
+                            <label>
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                        </th>
+                        <th>User</th>
+                        <th>Categry</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        <!-- row 1 -->
+                        <tr>
+                            <td></td>
+                            <th>
+                                <label>
+                                    <input type="checkbox" class="checkbox" />
+                                </label>
+                            </th>
+                            <td>{{ transaction.user }}</td>
+                            <td>{{ transaction.category }}</td>
+                            <td>{{ transaction.type }}</td>
+                            <td>{{ transaction.amount }}</td>
+                            <td>{{ transaction.time }}</td>
+                           
+                        </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+                
+{% endif %}
+
+{% endblock content %}
