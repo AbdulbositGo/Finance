@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'django_extensions',
+    'django_filters',
     'debug_toolbar',
     'widget_tweaks',
     'allauth',
