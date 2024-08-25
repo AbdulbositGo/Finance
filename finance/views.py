@@ -19,7 +19,11 @@ def transactions_list(request):
         queryset=transactions,
     )
 
+    template_name = 'finance/transactions-list.html'
+    if request.htmx:
+        template_name = 'finance/partial/transactions-container.html'
+
     context = {
         'filter': transaction_filter
     }
-    return render(request, 'finance/transactions-list.html', context)
+    return render(request, template_name, context)

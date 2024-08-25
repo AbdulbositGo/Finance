@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'django_filters',
+    'django_htmx',
     'debug_toolbar',
     'widget_tweaks',
     'allauth',
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
