@@ -26,5 +26,8 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date_time = models.DateTimeField()
 
+    class Meta:
+        ordering = ['-date_time']
+
     def __str__(self):
         return f'{self.type} of {self.amount} on {self.date_time} by {self.user}'
