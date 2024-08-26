@@ -1,7 +1,7 @@
 {% load widget_tweaks %}
 
 <div id="transactions-container" class="md:grid md:grid-cols-4 md:gap-3">
-    <div class="col-span-1">
+    <div class="col-span-1 mb-2">
         <form hx-get="{% url "transactions-list" %}"
             hx-target="#transactions-container"
             hx-swap="outerHTML"
@@ -30,7 +30,7 @@
                 <tbody>
                     {% for transaction in filter.qs %}
                         <tr class="border-b">
-                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{{ transaction.date_time }}</th>
+                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{{ transaction.date_time|date:"H:i | d/m/Y" }}</th>
                             <td class="px-4 py-3 whitespace-nowrap">{{ transaction.category }}</td>
                             <td class="px-4 py-3 whitespace-nowrap">
                                 {% if transaction.type == 'income' %}

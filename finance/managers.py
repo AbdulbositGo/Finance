@@ -5,7 +5,7 @@ class TransactionQuerySet(models.QuerySet):
     def get_expenses(self):
         return self.filter(type='expense')
     
-    def get_incomes(self):
+    def get_income(self):
         return self.filter(type='income')
     
     def get_total_expenses(self):
@@ -13,7 +13,8 @@ class TransactionQuerySet(models.QuerySet):
             total=models.Sum('amount')
         )['total'] or 0
     
-    def get_total_incomes(self):
-        return self.get_incomes().aggregate(
+    def get_total_income(self):
+        return self.get_income().aggregate(
             total=models.Sum('amount')
         )['total'] or 0
+    

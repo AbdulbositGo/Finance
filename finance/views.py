@@ -23,7 +23,12 @@ def transactions_list(request):
     if request.htmx:
         template_name = 'finance/partial/transactions-container.html'
 
+    total_income = transaction_filter.qs.get_total_income()
+    total_expenses = transaction_filter.qs.get_total_expenses()
     context = {
-        'filter': transaction_filter
+        'filter': transaction_filter,
+        'total_income': total_income,
+        'total_expenses': total_expenses,
+        'net_income': total_income - total_expenses
     }
     return render(request, template_name, context)
