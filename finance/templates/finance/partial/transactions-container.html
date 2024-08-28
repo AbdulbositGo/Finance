@@ -1,13 +1,35 @@
 {% load widget_tweaks %}
+{% load humanize %}
 
 <div id="transactions-container" class="md:grid md:grid-cols-4 md:gap-3">
     <div class="col-span-1 mb-2">
         <form hx-get="{% url "transactions-list" %}"
             hx-target="#transactions-container"
             hx-swap="outerHTML"
+            hx-select-oob="#totals"
             class="p-1">
-            {{ filter.form.transaction_type|add_label_class:"block mb-2 text-sm font-medium text-gray-900" }}
-            {% render_field filter.form.transaction_type class="block w-full p-2 mb-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500" %}
+            {% for field in filter.form %}
+                {% if not field.label == 'Category' %}
+                    {{ field|add_label_class:"block mb-2 text-sm font-medium text-gray-900" }}
+                    {% render_field field class="block w-full p-2 mb-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500" %}
+                {% endif %}
+            {% endfor %}
+            <div class="flex items-center justify-center">
+                <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+                  class="block w-full my-2 font-medium rounded-lg text-sm py-2.5 text-center inline-flex items-center"
+                  type="button">
+                  Filter by category
+                  <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+              
+                <div id="dropdown" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow" aria-expanded="false">
+                    {% render_field filter.form.category class="text-green-600 mb-2 border-gray-300 rounded focus:ring-green-500 focus:ring-2" %}
+                </div>
+              </div>
+            
             <button type="submit" class="focus:outline-none bg-green-500 text-sm hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-5 py-2">
                 Green
             </button>
@@ -39,7 +61,7 @@
                                     <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded border border-red-400">{{ transaction.type }}</span>
                                 {% endif %}
                             </td>
-                            <td class="px-4 py-3 whitespace-nowrap">${{ transaction.amount }}</td>
+                            <td class="px-4 py-3 whitespace-nowrap">${{ transaction.amount|intcomma }}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none" type="button">
                                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

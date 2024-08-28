@@ -2,63 +2,60 @@
 {% load widget_tweaks %}
 {% load i18n %}
 {% load account socialaccount %}
+{% load static %}
 
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+<div class="flex flex-col items-center justify-center px-6 mx-auto md:h-screen lg:py-0">
+    <a href="" class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+        <img class="w-12 h-12 mr-2" src="{% static "images/money-with-wings.svg" %}" alt="logo">
+        Finance    
+    </a>
+    <div class="w-full rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                Sign in to your account
+            </h1>
+            <form class="space-y-4 md:space-y-6" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                <div>
+                    <label for="{{ form.login.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">{{ form.login.label }}</label>
+                    {% render_field form.login class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5" placeholder="username" required="" %}
+                </div>
+                <div>
+                    <label for="{{ form.password.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">{{ form.password.label }}</label>
+                    {% render_field form.password placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5" required="" %}
+                </div>
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                {% if socialaccount_providers %}
+                    <p>{% blocktrans with site.name as site_name %}Please sign in with one
+                    of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+                    for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-<section class="bg-gray-50">
-    <div class="flex flex-col items-center justify-center px-6 mx-auto md:h-screen lg:py-0">
-        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
-            <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-            Flowbite    
-        </a>
-        <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                    Sign in to your account
-                </h1>
-                <form class="space-y-4 md:space-y-6" method="POST" action="{% url 'account_login' %}">
-                    {% csrf_token %}
-                    <div>
-                        <label for="{{ form.login.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">{{ form.login.label }}</label>
-                        {% render_field form.login class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="username" required="" %}
+                    <div class="socialaccount_ballot">
+
+                    <ul class="socialaccount_providers">
+                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                    </ul>
+
+                    <div class="login-or">{% trans 'or' %}</div>
+
                     </div>
-                    <div>
-                        <label for="{{ form.password.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">{{ form.password.label }}</label>
-                        {% render_field form.password placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required="" %}
-                    </div>
-                    {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                    {% endif %}
-                    {% if socialaccount_providers %}
-                        <p>{% blocktrans with site.name as site_name %}Please sign in with one
-                        of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-                        for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-                        <div class="socialaccount_ballot">
+                {% include "socialaccount/snippets/login_extra.html" %}
 
-                        <ul class="socialaccount_providers">
-                            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                        </ul>
-
-                        <div class="login-or">{% trans 'or' %}</div>
-
-                        </div>
-
-                    {% include "socialaccount/snippets/login_extra.html" %}
-
-                    {% else %}
-                    <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
-                    
-                    <p class="text-sm font-light text-gray-500">
-                        Don’t have an account yet? <a href="{{ signup_url }}" class="font-medium text-blue-600 hover:underline">Sign up</a>
-                    </p>
-                    {% endif %}
-                </form>
-            </div>
+                {% else %}
+                <button type="submit" class="w-full text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign in</button>
+                <p class="text-sm font-light text-gray-500">
+                    Don’t have an account yet? <a href="{{ signup_url }}" class="font-medium text-green-600 hover:underline">Sign up</a>
+                </p>
+                {% endif %}
+            </form>
         </div>
     </div>
-  </section>
+</div>
 {% endblock content %}
