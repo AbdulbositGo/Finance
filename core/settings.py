@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_filters',
     'django_htmx',
+    'django_cotton',
     'debug_toolbar',
     'widget_tweaks',
     'allauth',
@@ -114,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 

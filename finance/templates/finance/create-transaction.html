@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Create Transaction{% endblock title %}
+
+{% block content %}
+
+{% load widget_tweaks %}
+    <h2 class="text-4xl tracking-tight font-extrabold text-gray-900 mb-4">
+        Create Transaction
+    </h2>
+    <form hx-post="{% url "create-transaction" %}"
+        hx-push-url="true"
+        hx-target="#base-container"
+        hx-swap="innerHTML">
+        <div class="mb-5">
+            {{ form.type|add_label_class:'block mb-2 text-sm font-medium text-gray-900' }}
+            {% render_field form.type class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" %}
+        </div>
+        <div class="mb-5">
+            {{ form.amount|add_label_class:'block mb-2 text-sm font-medium text-gray-900' }}
+            {% render_field form.amount class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" %}
+        </div>
+        <div class="mb-5">
+            {{ form.date_time|add_label_class:'block mb-2 text-sm font-medium text-gray-900' }}
+            {% render_field form.date_time class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" %}
+        </div>
+        <div class="mb-5">
+            {% render_field form.category class="inline text-gray-900 mb-2 border-gray-300 rounded focus:ring-green-500 focus:ring-2" %}
+        </div>
+        
+        <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Submit</button>
+    </form>
+
+{% endblock content %}

@@ -1,25 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}{% endblock title %}
 
 
 {% block content %}
-<section class="bg-white">
-    <div class="py-8 px-4 sm:py-16 lg:px-6">
-        <div class="max-w-screen-md">
-            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">Welcome To The Personal Finance Tracker</h2>
-            <p class="mb-8 font-light text-gray-500 sm:text-xl">Flowbite helps you connect with friends, family and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups, Watch and Marketplace.</p>
-            <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+    <section class="bg-white">
+        <div class="px-4 lg:px-6">
+            <div class="max-w-screen-md">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">Welcome To The Personal Finance Tracker</h2>
+                <p class="mb-8 font-light text-gray-500 sm:text-xl">Flowbite helps you connect with friends, family and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups, Watch and Marketplace.</p>
+                <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
                 
-                <a href="{% url "transactions-list" %}" class="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100">
-                    <svg class="w-6 h-6 text-gray-800 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667"/>
-                    </svg>
-                    
-                    View transactions
-                </a>  
+                    <a href="{% url "transactions-list" %}" class="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100">
+                        <svg class="w-6 h-6 text-gray-800 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667"/>
+                        </svg>
+                        View transactions
+                    </a>  
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock content %}

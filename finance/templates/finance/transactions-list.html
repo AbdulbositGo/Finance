@@ -3,45 +3,15 @@
 {% load humanize %}
 
 {% block title %}
-Transactions List
+    Transactions List
 {% endblock title %}
 
 
 {% block content %}
-<section class="pt-8">
-    <div class="flex flex-col md:flex-row  justify-between mb-2">
-        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 flex items-center mb-4">
-            <svg class="w-10 h-10 text-gray-800 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5"/>
-            </svg>
-            Transactions List
-        </h2>
-        <div id="totals">
-            <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2 py-0.5 rounded border border-green-400">
-                <svg  xmlns="http://www.w3.org/2000/svg"  width="18"  height="18"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler me-1 inline icons-tabler-outline icon-tabler-trending-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 17l6 -6l4 4l8 -8" /><path d="M14 7l7 0l0 7" /></svg>
-                {{ total_income|floatformat:2|intcomma }}
-            </span>
-            <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2 py-0.5 rounded  border border-red-400">
-                <svg  xmlns="http://www.w3.org/2000/svg"  width="18"  height="18"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler me-1 icons-tabler-outline icon-tabler-trending-down inline"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7l6 6l4 -4l8 8" /><path d="M21 10l0 7l-7 0" /></svg>
-                {{ total_expenses|floatformat:2|intcomma }}
-            </span>
-            {% if net_income < 0 %}
-                <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded  border border-red-400">
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="18"  height="18"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler me-1 icons-tabler-outline icon-tabler-trending-down inline"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7l6 6l4 -4l8 8" /><path d="M21 10l0 7l-7 0" /></svg>
-                    {{ net_income|floatformat:2|intcomma }}
-                </span>
-            {% else %}
-                <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded border border-green-400">
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="18"  height="18"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler me-1 inline icons-tabler-outline icon-tabler-trending-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 17l6 -6l4 4l8 -8" /><path d="M14 7l7 0l0 7" /></svg>
-                    {{ net_income|floatformat:2|intcomma }}
-                </span>
-            {% endif %}
-        </div>
-    </div>
+<section id="transaction-block" class="">
     
-    <div class="bg-white relative overflow-hidden">
-        {% include "finance/partial/transactions-container.html" %}
-    </div>
+    {% include "finance/partial/transactions-container.html" %}
+
 </sectiion>
 
 {% endblock content %}

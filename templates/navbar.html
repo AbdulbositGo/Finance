@@ -6,12 +6,13 @@
         <img class="w-10 h-10 mr-2" src="{% static 'images/money-with-wings.svg' %}" />
         <span class="self-center text-2xl font-semibold whitespace-nowrap">Finance</span>
     </a>
-    <div class="flex md:order-2">
+    <div class="flex md:order-2 gap-2">
       {% if request.user.is_authenticated %}
         <a href="{% url 'account_logout' %}" class="hidden md:block text-gray-800 ms-2 my-auto font-semibold hover:underline">Log out</a>
       {% else %}
         <a href="{% url 'account_login' %}" class="hidden md:block text-gray-800 ms-2 my-auto font-semibold hover:underline">Login</a>
       {% endif %}
+      {{ request.user }}
       
       <button data-collapse-toggle="navbar-menu" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-menu" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
@@ -22,17 +23,29 @@
 
     </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-menu">
-      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+      <ul hx-select-oob="true" class="flex flex-col p-4 md:p-0 mt-4 font-medium md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
         <li>
-          <a href="/" class="block py-2 px-3 text-white bg-green-500 rounded md:bg-transparent md:text-green-700 md:p-0" aria-current="page">Home</a>
+          <a href="/" 
+            hx-get="{% url "home" %}"
+            hx-target="#base"
+            hx-push-url="true"
+            class="block py-2 px-3  rounded md:p-0" aria-current="page">Home</a>
         </li>
         <li>
-          <a href="{% url "transactions-list" %}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">Transactions</a>
+          <a hx-get="{% url "transactions-list" %}"
+            hx-target="#base-container"
+            hx-push-url="true"
+            href="{% url "transactions-list" %}"
+            class="cursor-pointer block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">Transactions</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">Services</a>
+          <a href="{% url "create-transaction" %}"
+            hx-get="{% url "create-transaction" %}"
+            hx-target="#base-container"
+            hx-push-url="true"
+            class="cursor-pointer block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">Add</a>
         </li>
-        <li>
+        <li class="block md:hidden">
           {% if request.user.is_authenticated %}
             <a href="{% url 'account_logout' %}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0">Log out</a>
           {% else %}
