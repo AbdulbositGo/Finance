@@ -23,8 +23,8 @@ class TransactionForm(forms.ModelForm):
     
     def save(self, commit=True):
         instance = super().save(commit=False)
-        print(make_aware(datetime.now()))
-        instance.date_time = make_aware(datetime.now())
+        if not instance.date_time:
+            instance.date_time = make_aware(datetime.now())
         if commit:
             instance.save()
         return instance

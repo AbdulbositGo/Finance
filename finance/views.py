@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from .models import User, Category, Transaction
@@ -49,3 +49,31 @@ def create_transaction(request):
         return render(request, 'finance/partial/create-transaction.html', context)
     return render(request, 'finance/create-transaction.html', context)
 
+
+@login_required
+def update_transaction(request, pk):
+    transaction = get_object_or_404(Transaction, id=pk)
+
+    if request.method == 'POST':
+        form = TransactionForm(request.POST, instance=transaction)
+        if form.is_valid():
+            form.save()
+            return redirect('transactions-list')
+        else:
+            context = {
+                'transaction': transaction,
+                'form': TransactionForm(request.POST, instance=transaction)
+            }
+            return render(request, 'finance/partial/update-transaction.html', context)
+
+    else:
+        form = TransactionForm(instance=transaction)
+
+    context = {
+        'transaction': transaction,
+        'form': form
+    }
+
+    if request.htmx:
+        return render(request, 'finance/partial/update-transaction.html', context)
+    return render(request, 'finance/update-transaction.html', context)
