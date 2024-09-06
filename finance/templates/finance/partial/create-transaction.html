@@ -1,5 +1,7 @@
 {% load widget_tweaks %}
 
+{% include "messages.html" %}
+
 <h2 class="text-4xl tracking-tight font-extrabold text-gray-900 mb-4">
     Create Transaction
 </h2>
@@ -40,6 +42,14 @@
         {% render_field form.category class="inline text-gray-900 mb-2 border-gray-300 rounded focus:ring-green-500 focus:ring-2" %}
     </div>
 
-    <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Submit</button>
+    <button type="submit" class="bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 me-2 text-center">Create</button>
+    <button hx-get="{% url "transactions-list" %}"
+        hx-target="#base-container"
+        hx-push-url="true"
+        href="{% url "transactions-list" %}"
+        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back-up inline">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
+        Back</button>
 </form>
   

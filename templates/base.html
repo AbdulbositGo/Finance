@@ -5,21 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <script src="{% static "js/htmx.min.js" %}"></script>
+    <script src="{% static 'js/htmx.min.js' %}"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css"  rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}"  rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
 
     <title>
         {% block title %}Personal Finance Tracker{% endblock title %}
     </title>
-    <style>
-        ::selection {
-            background-color: #22c55e; /* Change to your desired color */
-            color: black; /* Change text color */
-            border: 4px;
-        }
-    </style>
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' id='base'>
     {% include "navbar.html" %}

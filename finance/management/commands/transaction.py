@@ -33,7 +33,7 @@ class Command(BaseCommand):
         categories = Category.objects.all()
         transactions = []
         types = [x[0] for x in Transaction.TRANSACTION_TYPE_CHOICES]
-        for _ in range(100):
+        for _ in range(5):
             transactions.append(
                 Transaction(
                     category=random.choice(categories),

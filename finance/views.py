@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
+from django.contrib import messages
 
 from .models import User, Category, Transaction
 from .filters import TransactionFilter
@@ -41,6 +43,7 @@ def create_transaction(request):
             transaction = form.save(commit=False)
             transaction.user = request.user
             transaction.save()
+            messages.success(request, "A new transaction created")
             return redirect('transactions-list')    
     context = {
         'form': form
@@ -77,3 +80,13 @@ def update_transaction(request, pk):
     if request.htmx:
         return render(request, 'finance/partial/update-transaction.html', context)
     return render(request, 'finance/update-transaction.html', context)
+
+
+@login_required
+@require_http_methods(['DELETE'])
+def delete_transaction(request, pk):
+    transaction = get_object_or_404(Transaction, id=pk, user=request.user)
+    transaction.delete()
+    messages.error(request, f'Transaction of {transaction.amount} on \
+                   {transaction.date_time} was deleted ')
+    return redirect('transactions-list')
